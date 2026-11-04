@@ -1,0 +1,30 @@
+[
+  {
+    "id": "hoodie",
+    "name": "Oversize Kapüşonlu Sweatshirt",
+    "price": 899,
+    "image": "products/hoodie.png",
+    "prompt": "Substitute the current top with a charcoal grey oversized cotton hoodie with a kangaroo front pocket, white drawstrings and ribbed cuffs, relaxed casual fit"
+  },
+  {
+    "id": "kazak",
+    "name": "Dalga Desenli Örgü Kazak",
+    "price": 1249,
+    "image": "products/kazak.png",
+    "prompt": "Substitute the current top with a cobalt blue chunky knit sweater with thick cream wavy stripes across the body and sleeves, crew neck, relaxed fit"
+  },
+  {
+    "id": "tshirt",
+    "name": "Basic Kırmızı Tişört",
+    "price": 349,
+    "image": "products/tshirt.png",
+    "prompt": "Substitute the current top with a plain bright red cotton crew neck t-shirt with short sleeves and a regular fit, no logo"
+  },
+  {
+    "id": "ceket",
+    "name": "Kot Ceket",
+    "price": 1599,
+    "image": "products/ceket.png",
+    "prompt": "Substitute the current top with a mid-blue denim jacket with gold buttons, two chest pockets with contrast stitching, worn open over a white t-shirt"
+  }
+]

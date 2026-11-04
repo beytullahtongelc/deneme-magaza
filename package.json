@@ -1,0 +1,13 @@
+{
+  "name": "deneme-magaza",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/tryon.js --bundle --format=esm --minify --outfile=public/tryon.js",
+    "start": "node server.js",
+    "dev": "npm run build && npm start"
+  },
+  "dependencies": { "@decartai/sdk": "^0.2.14" },
+  "devDependencies": { "esbuild": "^0.25.0" }
+}
