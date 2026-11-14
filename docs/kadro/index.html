@@ -170,6 +170,9 @@ form.co label{display:grid;gap:5px;font-size:12.5px;color:var(--mute)}
 form.co input,form.co textarea{font:inherit;color:var(--ink);padding:11px 12px;border:1px solid var(--line);border-radius:4px;background:#fff;width:100%}
 pre.order{white-space:pre-wrap;font-family:var(--mono);font-size:12px;background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px;margin:18px 0 0}
 
+/* Anywear düğme yazısı Türkçe */
+.vton-btn .vton-label{font-size:0!important}
+.vton-btn .vton-label::after{content:"Üzerinde dene";font-size:12px;font-family:var(--body);font-weight:600;letter-spacing:0}
 .toast{position:fixed;left:50%;top:10px;transform:translate(-50%,-140px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:4px;font-size:13px;z-index:100;transition:transform .3s;white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
