@@ -48,7 +48,8 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin
 .lineup{position:relative;height:calc(var(--mh) + 30px);margin-top:10px;touch-action:pan-y;cursor:grab;user-select:none}
 .lineup.drag{cursor:grabbing}
 .model{position:absolute;left:50%;bottom:8px;height:var(--mh);transform-origin:50% 100%;transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .55s,opacity .55s;will-change:transform}
-.model img{display:block;height:100%;width:auto;max-width:none;pointer-events:none;-webkit-user-drag:none}
+.fig{display:block;height:100%;background:center/contain no-repeat;pointer-events:none}
+.pc{display:block;width:90%;height:90%;background:center/contain no-repeat}
 .model::before,.bigfig::before{content:"";position:absolute;left:8%;right:8%;bottom:-6px;height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.22),transparent)}
 .model.on{cursor:pointer}
 .model.on::after{content:"İNCELE";position:absolute;left:-46px;top:54%;width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;font:500 8.5px/46px var(--mono);letter-spacing:.1em;text-align:center}
@@ -62,7 +63,7 @@ h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin
 .stage.is-detail .lineup,.stage.is-detail .rail{display:none}
 .stage.is-detail .detail{display:block}
 .bigfig{position:absolute;left:50%;bottom:10px;height:94%;transform:translateX(-50%);animation:rise .5s cubic-bezier(.2,.8,.2,1)}
-.bigfig img{height:100%;width:auto;display:block;max-width:none}
+
 @keyframes rise{from{transform:translateX(-50%) scale(.86)}to{transform:translateX(-50%) scale(1)}}
 .spot{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:#fff;border:1px solid var(--ink);font:500 11px/24px var(--mono);text-align:center;box-shadow:0 0 0 6px rgba(255,255,255,.45)}
 .spot.on{background:var(--ink);color:#fff}
@@ -207,7 +208,7 @@ pre.order{white-space:pre-wrap;font-family:var(--mono);font-size:12px;background
     <ol><li>Koleksiyonda bir parça seç.</li><li>Kamera iznini ver, kadrajda belden yukarın görünsün.</li><li>Beğendiysen bedenini seçip sepete ekle.</li></ol>
     <div id="liveState"></div>
   </div>
-  <div class="livefig"><img src="img/c3.webp" alt="Siyah baskılı tişört ve bol paça pantolon giyen manken"></div>
+  <div class="livefig"><div class="fig" role="img" aria-label="Siyah baskılı tişört ve bol paça pantolon giyen manken" style="background-image:url(img/c3.webp);aspect-ratio:319/1100;margin:0 auto"></div></div>
 </div></section>
 </main>
 <footer><div class="wrap"><span>KADRO · Kombin vitrini<br><span class="credit">Fotoğraflar: Unsplash · Anton K Wibowo, Temuujin Purevjav, otabek xatipov, Design Wala, Brian Lundquist</span></span><span>Kombini tam alana %10 indirim · 14 gün içinde ücretsiz iade</span></div></footer>
@@ -250,8 +251,11 @@ const P={};LOOKS.forEach(L=>{L.items.forEach(it=>P[it.id]=it);L.items=L.items.ma
 const SIZES={Üst:['S','M','L','XL'],Alt:['S','M','L','XL'],Ayakkabı:['38','39','40','41','42','43','44']};
 const tl=n=>new Intl.NumberFormat('tr-TR').format(Math.round(n))+' ₺';
 const $=id=>document.getElementById(id);
-const figure=L=>`<img src="img/${L.img}.webp" alt="${L.name} kombinini giyen manken" draggable="false">`;
-const piece=id=>`<img src="img/p-${id}.webp" alt="${P[id].n}" loading="lazy">`;
+const AR={c1:'367/1100',c2:'386/981',c3:'319/1100',c4:'388/1100',c5:'520/942',c6:'316/1100'};
+/* Vitrin ve küçük resimler arka plan olarak çizilir; canlı deneme bileşeni yalnızca Koleksiyon'daki <img> ürünlerine düğme koyar. */
+const figure=L=>`<div class="fig" role="img" aria-label="${L.name} kombinini giyen manken" style="background-image:url(img/${L.img}.webp);aspect-ratio:${AR[L.img]}"></div>`;
+const piece=id=>`<span class="pc" role="img" aria-label="${P[id].n}" style="background-image:url(img/p-${id}.webp)"></span>`;
+const pieceImg=id=>`<img src="img/p-${id}.webp" alt="${P[id].n}" loading="lazy">`;
 
 /* ====== DURUM ====== */
 const S={i:2,detail:false,focus:null,size:{},filter:'Tümü',bag:{},step:'bag'};
@@ -317,7 +321,7 @@ function renderGrid(){
   $('filters').innerHTML=cats.map(c=>`<button class="${S.filter===c?'on':''}" data-filter="${c}">${c}</button>`).join('');
   $('grid').innerHTML=Object.keys(P).filter(id=>S.filter==='Tümü'||P[id].c===S.filter).map(id=>{
     const p=P[id];
-    return `<article class="card"><div class="pic">${piece(id)}</div>
+    return `<article class="card"><div class="pic">${pieceImg(id)}</div>
     <div class="meta"><b>${p.n}</b><span>${tl(p.p)}</span></div>
     <div class="sizes" style="margin:0" role="group" aria-label="Beden">${SIZES[p.c].map(z=>`<button class="${S.size[id]===z?'on':''}" data-size="${id}|${z}">${z}</button>`).join('')}</div>
     <button class="btn" data-add="${id}">Sepete ekle</button></article>`;
